@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "BetterVLR",
+  "version": "0.0.1",
+  "description": "VLR.gg but better",
+  "permissions": ["activeTab", "https://www.vlr.gg/"],
+  "icons": {
+    "128": "logo.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.vlr.gg/*"],
+      "js": [
+        "jquery-3.6.3.min.js",
+        "user_block.js",
+        "map_win_percentage.js",
+        "popper.min.js",
+        "tippy-bundle.umd.min.js",
+        "index.js"
+      ],
+      "css": ["style.css", "tippy.css", "translucent.css"]
+    }
+  ]
+}
