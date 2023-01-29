@@ -121,4 +121,3 @@ for (let index = 0; index < elemlist.length; index++) {
 for (let index = 0; index < deletelist.length; index++) {
     deletelist[index].remove()
 }
-

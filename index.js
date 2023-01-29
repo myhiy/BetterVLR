@@ -25,7 +25,14 @@ let imageLinks = $('.post-body').find('a[href$=".jpg"], a[href$=".jpeg"], a[href
 $(document).ready(function () {
     $.each($('.post-body').find('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]'), function (index, element) {
         var imgSrc = $(this).attr('href');
-        $(this).parent().after('<img src="' + imgSrc + '" style="border-radius: 5px; max-width: 500px;"/>');
+        $(this).parent().after('<img src="' + imgSrc + '" href="' + imgSrc + '" style="border-radius: 5px; max-width: 500px;"/>');
+    });
+});
+//image lightbox
+$(document).ready(function () {
+    $('.post-body img').magnificPopup({
+        type: 'image',
+        showCloseBtn: false
     });
 });
 
