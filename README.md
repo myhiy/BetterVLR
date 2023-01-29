@@ -9,7 +9,7 @@
   <p align="center">
     VLR but better!
     <br/>
-    <a href="https://chrome.google.com/webstore"><strong>Download »</strong></a>
+    <a href="https://chrome.google.com/webstore/detail/bettervlr/cmdelclhhmllfeciclafkfafhcjggple"><strong>Download »</strong></a>
     <br/>
     <br/>
     <a href="https://github.com/myhiy/BetterVLR#features">View Features</a>
@@ -20,7 +20,7 @@
   </p>
 </div>
 
-> The project is obviously still in early development so if you have any ideas or know how to code contributing is very much appreciated
+> The project is obviously still in early development so if you have any ideas, found any bugs or know how to code [contributing](https://github.com/myhiy/BetterVLR#contributing) is very much appreciated
 
 <!-- ABOUT THE PROJECT -->
 
@@ -50,7 +50,7 @@
 
 - Map Win Percentage
 
-![img](https://i.imgur.com/KCEt7cm.png)
+![img](https://i.imgur.com/DlvTT56.png)
 
 <!-- CONTRIBUTING -->
 

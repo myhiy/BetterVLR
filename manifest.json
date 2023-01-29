@@ -14,13 +14,14 @@
       "matches": ["https://www.vlr.gg/*"],
       "js": [
         "jquery-3.6.3.min.js",
+        "jquery.magnific-popup.min.js",
         "user_block.js",
         "map_win_percentage.js",
         "popper.min.js",
         "tippy-bundle.umd.min.js",
         "index.js"
       ],
-      "css": ["style.css", "tippy.css", "translucent.css"]
+      "css": ["style.css", "tippy.css", "translucent.css", "magnific-popup.css"]
     }
   ]
 }

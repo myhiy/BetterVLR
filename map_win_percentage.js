@@ -5,6 +5,7 @@ function showMapsPercentage() {
 
     $(
         `<link rel="stylesheet" href="https://www.vlr.gg/css/base/pages/team_stats_vlr.css?v=2" type="text/css" />
+        <link rel="stylesheet" href="https://www.vlr.gg/css/base/pages/dark.css?v=2" type="text/css" />
        <link rel="stylesheet" href="https://www.vlr.gg/css/base/pages/team.css?v=26" type="text/css" />
        <link rel="stylesheet" href="https://www.vlr.gg/css/base/pages/r/team.css?v=6" type="text/css" />
        <div class="wf-label" style="margin: 22px 0 0 0;" id="maps_winrate">Maps winrate percentage</div>
