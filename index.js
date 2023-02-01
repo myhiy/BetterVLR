@@ -2,21 +2,23 @@
 $("img[src*='owcdn.net/img/62875027c8e06.png']").css("border-radius", "4px");
 
 
+//TOOLTIPS
+$(document).ready(function () {
+    tippy("[title]", {
+        theme: "translucent",
+        content: (reference) => reference.getAttribute("title"),
+    });
+
+    $("[title]").attr("title", "");
+});
+
+
 //OP (ORIGINAL POSTER) BADGE
 var OP = $(".post-header-author").first().text();
 
 if ($(".thread-header").is(":visible")) {
     $(".post-header-author:contains('" + OP + "')").after('<span class="badge-pill" title="Original Poster">OP</span>');
 }
-
-
-//TOOLTIPS
-tippy("[title]", {
-    theme: "translucent",
-    content: (reference) => reference.getAttribute("title"),
-});
-
-$("[title]").attr("title", "");
 
 
 //EMBED IMAGE LINKS

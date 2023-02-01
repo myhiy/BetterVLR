@@ -1,13 +1,15 @@
 {
   "manifest_version": 3,
   "name": "BetterVLR",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "VLR.gg but better",
   "icons": {
     "128": "logo.png"
   },
-  "background": {
-    "service_worker": "background.js"
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{58584ae4-c748-4e39-bbb9-a96980da62cd}"
+    }
   },
   "content_scripts": [
     {

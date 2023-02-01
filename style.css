@@ -12,3 +12,19 @@
   background-color: #da626c;
   color: #fff;
 }
+
+.flag.mod-unknown {
+  background-image: url("https://i.imgur.com/cTWlRQQ.png");
+  background-image: -webkit-image-set(
+    url("https://i.imgur.com/cTWlRQQ.png") 1x,
+    url("https://i.imgur.com/cTWlRQQ.png") 2x
+  );
+  background-image: image-set(
+    "https://i.imgur.com/cTWlRQQ.png" 1x,
+    "https://i.imgur.com/cTWlRQQ.png" 2x
+  );
+}
+
+.blocked-post {
+  display: none !important;
+}

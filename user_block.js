@@ -1,123 +1,149 @@
-//FIXED FROM https://greasyfork.org/en/scripts/443475-vlr-gg-user-blocker
+//Insert block users category in settings
+$(".wf-card.mod-form:last").after(`<div class="wf-card mod-form mod-dark">
+<div class="form-section" style="margin-top: 0;">Block Users</div><div style="display: flex; justify-content: space-between;">
+  <input type="text" id="userToBlock" placeholder="USER TO BLOCK">
+  <button id="blockBtn" class="btn mod-action" style="background-color: #d04e59; width: 50px; margin-right: 570px;">Block</button>
+</div>
 
-function htmlToElement(html) {
-    var template = document.createElement('template');
-    html = html.trim();
-    template.innerHTML = html;
-    return template.content.firstChild;
-}
-if (document.URL == "https://www.vlr.gg/settings") {
-    // Creates unblock and block entry forms and buttons.
-    let blocklist_div = document.createElement("div")
-    blocklist_div.className = "wf-card mod-form mod-dark";
-    let blocklist_blockedusers_label = htmlToElement("<div class=\"form-label\">Blocked Users</div>");
-    let blocklist_blockedusers_p = document.createElement("p")
-    let blocklist_block_label = htmlToElement("<div class=\"form-label\">Block a User</div>")
-    let blocklist_unblock_label = htmlToElement("<div class=\"form-label\">Unblock a User</div>")
-    let blocklist_block_entry = document.createElement("input")
-    let blocklist_block_button = document.createElement("button")
-    let blocklist_unblock_entry = document.createElement("input")
-    let blocklist_unblock_button = document.createElement("button")
+<ul id="blockedUsers">
 
-    if (!localStorage.getItem("saved_blocked_users")) {
-        localStorage.setItem("saved_blocked_users", []);
-    }
-    let blocked_users_string = localStorage.getItem("saved_blocked_users")
-    let blocked_users_array = blocked_users_string.split(",")
-    // the blocked users list is stored as a string delimited by commas
-
-    blocklist_blockedusers_p.innerText = (blocked_users_array)
+</ul>
+</div>`);
 
 
-
-    blocklist_block_button.innerText = "Block"
-    blocklist_block_button.type = "button"
-    blocklist_block_button.className = "btn"
-    blocklist_block_button.onclick = function alertfromtestentry() {
-        alert("Blocked " + blocklist_block_entry.value)
-        blocked_users_array.push(blocklist_block_entry.value)
-        localStorage.setItem("saved_blocked_users", blocked_users_array)
-        blocklist_block_entry.value = ""
-        blocklist_blockedusers_p.innerText = (blocked_users_array)
-    }
-    //Block users button creates alert, adjusts array and stored array, resets entry box and list
-
-    blocklist_block_entry.type = "text"
+$(document).ready(function () {
+    //Load blocked users from local storage
+    var blockedUsers = JSON.parse(localStorage.getItem("blockedUsers")) || [];
 
 
-
-    blocklist_unblock_button.innerText = "Unblock"
-    blocklist_unblock_button.type = "button"
-    blocklist_unblock_button.className = "btn"
-    blocklist_unblock_button.onclick = function alertfromtestentry2() {
-        alert("Unblocked " + blocklist_unblock_entry.value)
-        let remove_index = (blocked_users_array.findIndex(element => element === blocklist_unblock_entry.value))
-        if (remove_index > 0) {
-            // findIndex() returns -1 if the element is not in the array.
-            blocked_users_array.splice(remove_index, 1)
-        }
-        localStorage.setItem("saved_blocked_users", blocked_users_array)
-        blocklist_unblock_entry.value = ""
-        blocklist_blockedusers_p.innerText = (blocked_users_array)
-    }
-
-    blocklist_unblock_entry.type = "text"
-
-    let forms = document.getElementsByTagName("form");
-    let form = forms[1];
-    // all the grey blocks in the settings page are children of this form
-    form.appendChild(blocklist_div);
-    blocklist_div.appendChild(blocklist_blockedusers_label);
-    blocklist_div.appendChild(blocklist_blockedusers_p);
-    blocklist_div.appendChild(blocklist_block_label);
-    blocklist_div.appendChild(blocklist_block_entry);
-    blocklist_div.appendChild(blocklist_block_button);
-    blocklist_div.appendChild(blocklist_unblock_label);
-    blocklist_div.appendChild(blocklist_unblock_entry);
-    blocklist_div.appendChild(blocklist_unblock_button);
-}
+    //Render the blocked users list
+    renderBlockedUsers();
 
 
-
-
-let blocked_users_string = localStorage.getItem("saved_blocked_users")
-let blocked_users_array = [];
-if (blocked_users_string) {
-    blocked_users_array = blocked_users_string.split(",");
-}
-let elemlist = document.getElementsByClassName("post-header-author mod-vlr"); //class for any post or reply on a thread page
-let blocklist = new Set(blocked_users_array);
-let deletelist = [];
-
-if (document.URL == "https://www.vlr.gg/threads") {
-    let descs = document.getElementsByClassName("description") // class that contains the author of the post
-    for (let i = 0; i < descs.length; i++) {
-        try {
-            let a_tag = descs[i].getElementsByTagName("a")
-            a_tag = a_tag[0] // gets the <a> element that contains the author
-            let post_author = a_tag.innerText
-            if (blocklist.has(post_author)) {
-                let parent_post = descs[i].parentElement;
-                parent_post = parent_post.parentElement; // selects whole post
-                deletelist.push(parent_post);
-
+    //Handle block button click
+    $("#blockBtn").click(function (e) {
+        e.preventDefault();
+        var userToBlock = $("#userToBlock").val();
+        var username = $(".mod-user").attr("href").split("/")[2];
+        if (userToBlock && userToBlock !== username) {
+            if (blockedUsers.indexOf(userToBlock) == -1) {
+                blockedUsers.push(userToBlock);
+                localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
+                renderBlockedUsers();
+                $("#userToBlock").val("");
+            } else {
+                //Prevent users from blocking the same person twice
+                alert("This user is already blocked!");
             }
+        } else {
+            //Prevent users from blocking themselves
+            alert("You can't block yourself!");
         }
-        catch (TypeError) { // in case of authorless posts
+    });
+
+
+    //Handle unblock button click
+    $(document).on("click", ".unblockBtn", function () {
+        var userToUnblock = $(this).data("user");
+        blockedUsers = blockedUsers.filter(function (user) {
+            return user != userToUnblock;
+        });
+        localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
+        renderBlockedUsers();
+    });
+
+
+    function renderBlockedUsers() {
+        $("#blockedUsers").empty();
+        blockedUsers.forEach(function (user) {
+            $("#blockedUsers").append(`
+            <li style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+            <a href="/user/${user}" class="">${user}</a>
+            <button class="btn mod-action unblockBtn btn" data-user="${user}" style="background-color: #79c38a; width: 50px; margin-right: 570px;">Unblock</button>
+            </li>`);
+        });
+    }
+
+
+    for (var i = 0; i < blockedUsers.length; i++) {
+        var postBtns = `<div class="btn mod-action show-post" style="width: 45%; text-align: center; margin: 0px;">Show post</div>
+        <div class="btn mod-action unblock-post" style="width: 45%; text-align: center; margin: 0px;">Unblock</div>`
+        var postNumber = $(`.post-header:contains('${blockedUsers[i]}') > .post-header-num`).text();
+        var postFooter = $(`.post-header:contains('${blockedUsers[i]}')`).next().next().html();
+        var postId = $(`.post-header:contains('${blockedUsers[i]}')`).next().next().next().attr("data-post-id");
+        var stars = `<div class="star mod-0"></div>`
+        var originalPostHeader = $(`.post-header:contains('${blockedUsers[i]}')`).html()
+        var originalPost = $(`.post-header:contains('${blockedUsers[i]}')`).next().html();
+
+        //Hide blocked users posts
+        $(`.post-header:contains('${blockedUsers[i]}')`).parent().replaceWith(`<div class="wf-card post">
+        <div class="blocked-post-toggle post-toggle js-post-toggle noselect"></div>
+        <div class="post-header noselect">
+            <div class="post-header-num">${postNumber}</div>
+            <i class="post-header-flag flag mod-unknown" title="Unknown"></i>
+            <a class="post-header-author mod-vlr">Blocked User</a>
+            <div class="post-header-stars">${stars}${stars}${stars}${stars}</div>
+            <div class="post-header-children"></div>
+        </div>
+        <div class="post-header noselect blocked-post">${originalPostHeader}</div>
+        <div class="post-block-buttons" style="margin: 20px; display: flex; justify-content: space-between;">${postBtns}</div>
+        <div class="post-body blocked-post">${originalPost}</div>
+        <div class="post-footer">${postFooter}</div>
+        <div class="report-form" data-post-id="${postId}"></div>
+        <div class="reply-form" data-post-id="${postId}"></div>
+        </div>`);
+    }
+
+    //Handle show/hide post button click
+    $(".show-post").click(function () {
+        $(this).text($(this).text() == 'Hide Post' ? 'Show Post' : 'Hide Post');
+        $(this).parent().prev().prev().toggle();
+        $(this).parent().prev().toggleClass("blocked-post");
+        $(this).parent().next().toggleClass("blocked-post");
+    });
+
+    //Handle unblock post button click
+    $(".unblock-post").click(function () {
+        var unblockPostUser = $(this).parent().prev().find(".post-header-author").text().trim();
+        $(this).attr('data-user', unblockPostUser);
+        var userToUnblock = $(this).data("user");
+        blockedUsers = blockedUsers.filter(function (user) {
+            return user != userToUnblock;
+        });
+        localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
+        renderBlockedUsers();
+        location.reload();
+    });
+
+    //Dont make a block footer button for the user or for already blocked users
+    $('.post-action.reply-btn').each(function () {
+        var idk = $(this).attr("data-author-name");
+        if ($(this).parent().text().indexOf("edit") == -1 && !$(this).closest('.post').find('.post-block-buttons').length) {
+            $(this).before(`<a class="post-action block-btn" data-user="${idk}">block</a>
+            <span class="post-action-div">•</span>`);
         }
-    }
-}
+    });
 
-for (let index = 0; index < elemlist.length; index++) {
-    console.log(elemlist[index].innerText)
-    if (blocklist.has(elemlist[index].innerText)) {
+    // Handle footer block button click
+    $(".post-action.block-btn").click(function () {
+        var userToBlock = $(this).data("user");
+        if (userToBlock) {
+            blockedUsers.push(userToBlock);
+            localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
+            renderBlockedUsers();
+        }
+        location.reload();
+    });
 
-        let parent = elemlist[index].parentElement;
-        parent = parent.parentElement; //to remove the entire post and not just the header
-        deletelist.push(parent);
-    }
-
-}
-for (let index = 0; index < deletelist.length; index++) {
-    deletelist[index].remove()
-}
+    //Make blocked posts collapsable
+    $(".blocked-post-toggle").click(function () {
+        var e = $(this).closest(".threading").children(".threading"),
+            t = $(this).closest(".post"),
+            i = $(this).hasClass("mod-collapsed");
+        if (e.toggle(), $(this).toggleClass("mod-collapsed"), t.toggleClass("mod-collapsed"), !i) {
+            var n = e.find(".post").length,
+                s = t.find(".post-header-children");
+            s.html("(" + n + " children hidden)")
+        }
+    })
+});

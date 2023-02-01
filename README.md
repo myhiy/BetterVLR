@@ -1,5 +1,5 @@
 <!-- PROJECT LOGO -->
-<br />
+<br/>
 <div align="center">
   <a href="https://github.com/myhiy/BetterVLR">
     <img src="logo.png" alt="Logo" width="80" height="80">
@@ -8,10 +8,10 @@
   <h3 align="center">BetterVLR</h3>
   <p align="center">
     VLR but better!
-    <br/>
-    <a href="https://chrome.google.com/webstore/detail/bettervlr/cmdelclhhmllfeciclafkfafhcjggple"><strong>Download »</strong></a>
-    <br/>
-    <br/>
+    <p align="center">
+      <a href="https://chrome.google.com/webstore/detail/bettervlr/cmdelclhhmllfeciclafkfafhcjggple"><img src="https://i.imgur.com/b6al3Pc.png"></a>
+      <a href="https://addons.mozilla.org/firefox/addon/bettervlr"><img src="https://i.imgur.com/xIe2Ak9.png"></a>
+    </p>
     <a href="https://github.com/myhiy/BetterVLR#features">View Features</a>
     ·
     <a href="https://github.com/myhiy/BetterVLR/issues">Report Bug</a>
@@ -44,9 +44,9 @@
 
 ![img](https://i.imgur.com/wiCkmlm.png)
 
-- Very VERY basic block feature thats gonna get rewrited later on
+- Block users
 
-![img](https://i.imgur.com/EKEJxqs.png)
+![img](https://i.imgur.com/3zfrzio.png)
 
 - Map Win Percentage
 
