@@ -28,3 +28,36 @@
 .blocked-post {
   display: none !important;
 }
+
+.vct2023 {
+  border: 1px solid #fff;
+  border-radius: 10px;
+  height: 100px;
+  padding: 5px;
+}
+
+.vct2023:hover {
+  box-shadow: inset 0px 0px 50px 0px #ff4455;
+}
+
+.vct2022 {
+  border: 1px solid #fff;
+  border-radius: 10px;
+  height: 100px;
+  padding: 5px;
+}
+
+.vct2022:hover {
+  box-shadow: inset 0px 0px 50px 0px #c6b275;
+}
+
+.vct2021 {
+  border: 1px solid #fff;
+  border-radius: 10px;
+  height: 100px;
+  padding: 5px;
+}
+
+.vct2021:hover {
+  box-shadow: inset 0px 0px 50px 0px #bb8934;
+}

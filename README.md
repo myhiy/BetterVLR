@@ -68,12 +68,3 @@ Don't forget to give the project a star! Thanks again!
 Your Name - [@myhiyy](https://twitter.com/myhiyy) - myhiyyyy@gmail.com
 
 Project Link: [https://github.com/myhiy/BetterVLR](https://github.com/myhiy/BetterVLR)
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- [Map Win Percentage](https://greasyfork.org/en/scripts/436447-maps-winrate-percentage-for-vlr-gg-match-page)
-- And fixed code from [User Blocker](https://greasyfork.org/en/scripts/443475-vlr-gg-user-blocker)
-
-[product-screenshot]: https://i.imgur.com/SNpl1mG.png

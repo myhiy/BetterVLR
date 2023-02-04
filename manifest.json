@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BetterVLR",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "VLR.gg but better",
   "icons": {
     "128": "logo.png"
@@ -16,9 +16,10 @@
       "matches": ["https://www.vlr.gg/*"],
       "js": [
         "jquery-3.6.3.min.js",
+        "winbox.bundle.min.js",
         "jquery.magnific-popup.min.js",
-        "user_block.js",
-        "map_win_percentage.js",
+        "user-block.js",
+        "map-win-percentage.js",
         "popper.min.js",
         "tippy-bundle.umd.min.js",
         "index.js"
