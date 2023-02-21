@@ -20,13 +20,14 @@
   </p>
 </div>
 
-> The project is obviously still in early development so if you have any ideas, found any bugs or know how to code [contributing](https://github.com/myhiy/BetterVLR#contributing) is very much appreciated
-
 <!-- ABOUT THE PROJECT -->
 
 <a href="https://github.com/myhiy/BetterVLR"><img src="https://i.imgur.com/sLF5G5L.png" style="border-radius: 5px;"></a>
 
 ## Features
+
+<details>
+<summary>Click to expand</summary><br></br>
 
 - OP (Original Poster) badge
 
@@ -51,6 +52,8 @@
 - Map Win Percentage
 
 <img src="https://i.imgur.com/jU6mFeK.png" style="border-radius: 5px;">
+
+</details>
 
 <!-- CONTRIBUTING -->
 
