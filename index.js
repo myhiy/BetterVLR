@@ -1,8 +1,12 @@
-//SENTINELS LOGO
-$("img[src*='owcdn.net/img/62875027c8e06.png']").css("border-radius", "4px");
+// Get the username from the header link
+var username = $(".header-nav-item.mod-user").attr("href").split("/user/")[1];
 
 
-//TOOLTIPS
+// Sentinels logo
+$("img[src*='owcdn.net/img/62875027c8e06.png']").css("border-radius", "3px");
+
+
+// Add tooltips
 $(document).ready(function () {
     tippy("[title]", {
         theme: "translucent",
@@ -13,24 +17,24 @@ $(document).ready(function () {
 });
 
 
-//OP (ORIGINAL POSTER) BADGE
+// Add an OP badge to the original poster of a thread
 var OP = $(".post-header-author").first().text();
 
 if ($(".thread-header").is(":visible")) {
-    $(".post-header-author:contains('" + OP + "')").after('<span class="badge-pill" title="Original Poster">OP</span>');
+    $(".post-header-author:contains('" + OP + "')").after(`<span class="badge-pill" title="Original Poster">OP</span>`);
 }
 
 
-//EMBED IMAGE LINKS
-let imageLinks = 'a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]';
-//embed images in posts
+// Define the image links to look for
+var image_links = 'a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]';
+// Embed images in posts after the link
 $(document).ready(function () {
-    $.each($('.post-body').find(imageLinks), function (index, element) {
-        var imgSrc = $(this).attr('href');
-        $(this).parent().after('<img src="' + imgSrc + '" href="' + imgSrc + '" style="border-radius: 5px; max-width: 500px;"/>');
+    $.each($('.post-body').find(image_links), function (index, element) {
+        var img_src = $(this).attr('href');
+        $(this).parent().after(`<img src="${img_src}" href="${img_src}" style="border-radius: 5px; max-width: 500px;"/>`);
     });
 });
-//image lightbox
+// Add a lightbox to the images
 $(document).ready(function () {
     $('.post-body img').magnificPopup({
         type: 'image',
@@ -39,19 +43,19 @@ $(document).ready(function () {
 });
 
 
-//EMBED TWEETS/TWITTER LINKS
+// Embed tweet/twitter links in posts
 $('.post-body').each(function () {
-    var $postBody = $(this);
-    $postBody.find('a').each(function () {
-        var $link = $(this);
-        var tweetUrl = $link.attr('href');
+    var post_body = $(this);
+    post_body.find('a').each(function () {
+        var link = $(this);
+        var tweet_url = link.attr('href');
 
-        if (tweetUrl.indexOf('twitter.com') !== -1 && tweetUrl.indexOf('/status/') !== -1) {
+        if (tweet_url.indexOf('twitter.com') !== -1 && tweet_url.indexOf('/status/') !== -1) {
             $.ajax({
-                url: 'https://noembed.com/embed?url=' + tweetUrl,
+                url: 'https://noembed.com/embed?url=' + tweet_url,
                 dataType: 'json',
                 success: function (data) {
-                    $link.replaceWith(data.html);
+                    link.replaceWith(data.html);
                 }
             });
         }
@@ -59,7 +63,7 @@ $('.post-body').each(function () {
 });
 
 
-//VCT HEADER DROPDOWN
+// Add a VCT dropdown to the header
 $(".header-nav-item.mod-stats.mod-vlr").next().after(`<a class="header-nav-item mod-stats mod-vct" style="position: relative;"> VCT </a>
 <div class="header-div"></div>`);
 
@@ -75,20 +79,78 @@ tippy('.header-nav-item.mod-stats.mod-vct', {
 });
 
 
-//BETTERVLR VERSIONS UNDER RECENT DISCUSSIONS
-$(".js-home-threads").after(`<a href="https://github.com/myhiy/BetterVLR" target="_blank" class="wf-label mod-sidebar">BetterVLR</a>
-<div class="wf-card mod-dark mod-sidebar better-vlr-sidebar">
-    <a href="https://www.vlr.gg/169891/bettervlr-update" class="wf-module-item mod-disc" style="box-shadow: inset 0 0 20px #da626c;">
-        <div class="module-item-title">BetterVLR Update</div>
-        <div class="module-item-count">0.0.3</div>
-    </a>
-    <a href="https://www.vlr.gg/169520/bettervlr-update" class="wf-module-item mod-disc" style="box-shadow: inset 0 0 20px #da626c;">
-        <div class="module-item-title">BetterVLR Update</div>
-        <div class="module-item-count">0.0.2</div>
-    </a>
-    <a href="https://www.vlr.gg/169218/bettervlr" class="wf-module-item mod-disc" style="box-shadow: inset 0 0 20px #da626c;">
-        <div class="module-item-title">BetterVLR</div>
-        <div class="module-item-count">RELEASE</div>
-    </a>
-</div>`);
-$(".better-vlr-sidebar > .wf-module-item:first").addClass("mod-first");
+$.get("https://snippet.host/wfrgud/raw", function (data) {
+    $(".js-home-threads").after(data);
+    $(".bettervlr-unread").each(function () {
+        var version = $(this).text().replace(/\s+/g, " ").trim();
+        var changelog_read = JSON.parse(localStorage.getItem("changelog_read")) || {};
+        localStorage.setItem("changelog_read", JSON.stringify(changelog_read));
+        if (changelog_read[version]) {
+            $(this).removeClass("bettervlr-unread");
+        }
+        else {
+            $(this).on("click", function () {
+                $(this).removeClass("bettervlr-unread");
+                changelog_read[version] = "read";
+                localStorage.setItem("changelog_read", JSON.stringify(changelog_read));
+            });
+        }
+    });
+});
+
+
+
+
+
+if (window.location.href === "https://www.vlr.gg/settings") {
+    $(document).ready(function () {
+        // Add buttons
+        var buttons = $(`<div id="button-wrapper">
+        <button id="vlr-button">VLR</button>
+        <button id="better-vlr-button">BetterVLR</button>
+        <button id="blocked-users-button">Blocked Users</button>
+        <button id="saved-posts-button">Saved Posts</button>
+        </div>`);
+        $('form:last').before(buttons);
+
+        // Add test div
+        var bettervlr_settings = $('<div id="bettervlr-settings" style="display:none;">Test1</div>');
+        var blocked_users_settings = $(`<div class="wf-card mod-form mod-dark" id="blocked-users-settings" style="display:none;"><form>
+         <div class="form-section" style="margin-top: 0;">Block Users</div><div style="display: flex; justify-content: space-between;">
+           <input type="text" id="user-to-block" placeholder="USER TO BLOCK">
+           <div id="block-btn" class="btn mod-action" style="background-color: #d04e59; width: 50px; margin-right: 570px; text-align: center;">Block</div>
+         </div>
+        
+         <ul id="blocked_users">
+        
+         </ul></form>
+         </div>`);
+        var saved_posts_settings = $('<div id="saved-posts-settings" style="display:none;">Test3</div>');
+        $('form:last').after(bettervlr_settings, blocked_users_settings, saved_posts_settings);
+
+        // Button click handlers
+        $('#vlr-button').on('click', function () {
+            $('form:last').show();
+            $('#bettervlr-settings, #blocked-users-settings, #saved-posts-settings').hide();
+        });
+        $('#better-vlr-button').on('click', function () {
+            $('form:last, #blocked-users-settings, #saved-posts-settings').hide();
+            $('#bettervlr-settings').show();
+        });
+        $('#blocked-users-button').on('click', function () {
+            $('form:last, #bettervlr-settings, #saved-posts-settings').hide();
+            $('#blocked-users-settings').show();
+        });
+        $('#saved-posts-button').on('click', function () {
+            $('form:last, #bettervlr-settings, #blocked-users-settings').hide();
+            $('#saved-posts-settings').show();
+        });
+    });
+}
+
+
+// When the form is submitted
+$(document).on("submit", "#block-btn", function (event) {
+    // Prevent the page from reloading
+    event.preventDefault();
+});

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BetterVLR",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "VLR.gg but better",
   "icons": {
     "128": "logo.png"

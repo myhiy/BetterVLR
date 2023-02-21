@@ -1,149 +1,170 @@
-//Insert block users category in settings
-$(".wf-card.mod-form:last").after(`<div class="wf-card mod-form mod-dark">
-<div class="form-section" style="margin-top: 0;">Block Users</div><div style="display: flex; justify-content: space-between;">
-  <input type="text" id="userToBlock" placeholder="USER TO BLOCK">
-  <button id="blockBtn" class="btn mod-action" style="background-color: #d04e59; width: 50px; margin-right: 570px;">Block</button>
-</div>
-
-<ul id="blockedUsers">
-
-</ul>
-</div>`);
-
-
+// When the document is ready
 $(document).ready(function () {
-    //Load blocked users from local storage
-    var blockedUsers = JSON.parse(localStorage.getItem("blockedUsers")) || [];
+    // Check if there is a blocked users list in the local storage
+    if (localStorage.getItem("blocked_users")) {
+        // Get the list from the local storage
+        var blocked_users = JSON.parse(localStorage.getItem("blocked_users"));
 
+        // Render the list
+        renderList(blocked_users);
+    }
+});
 
-    //Render the blocked users list
-    renderBlockedUsers();
+// When the block button is clicked
+$(document).on("click", "#block-btn", function (event) {
+    // Prevent the page from reloading
+    event.preventDefault();
+    // Get the value of the text box
+    var user_to_block = $("#user-to-block").val();
 
+    // Check if the user is not empty, not a whitespace string, and not the same as the current user
+    if (user_to_block && user_to_block.trim() && user_to_block !== username) {
+        // Write the user to the local storage under the blocked_users key
+        var blocked_users = JSON.parse(localStorage.getItem("blocked_users")) || {};
+        blocked_users[user_to_block] = "blocked";
+        localStorage.setItem("blocked_users", JSON.stringify(blocked_users));
 
-    //Handle block button click
-    $("#blockBtn").click(function (e) {
-        e.preventDefault();
-        var userToBlock = $("#userToBlock").val();
-        var username = $(".mod-user").attr("href").split("/")[2];
-        if (userToBlock && userToBlock !== username) {
-            if (blockedUsers.indexOf(userToBlock) == -1) {
-                blockedUsers.push(userToBlock);
-                localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
-                renderBlockedUsers();
-                $("#userToBlock").val("");
-            } else {
-                //Prevent users from blocking the same person twice
-                alert("This user is already blocked!");
-            }
-        } else {
-            //Prevent users from blocking themselves
-            alert("You can't block yourself!");
-        }
-    });
+        // Clear the text box
+        $("#user-to-block").val("");
 
+        // Render the list again
+        renderList(blocked_users);
+    } else {
+        // Show an error message
+        alert("Invalid user to block");
+    }
+});
 
-    //Handle unblock button click
-    $(document).on("click", ".unblockBtn", function () {
-        var userToUnblock = $(this).data("user");
-        blockedUsers = blockedUsers.filter(function (user) {
-            return user != userToUnblock;
-        });
-        localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
-        renderBlockedUsers();
-    });
+// When the page loads
+$(document).ready(function () {
+    // Get the list of blocked users from the local storage
+    var blocked_users = JSON.parse(localStorage.getItem("blocked_users")) || {};
 
+    // Store the list in the local storage
+    localStorage.setItem("blocked_users", JSON.stringify(blocked_users));
 
-    function renderBlockedUsers() {
-        $("#blockedUsers").empty();
-        blockedUsers.forEach(function (user) {
-            $("#blockedUsers").append(`
+    // Render the list
+    renderList(blocked_users);
+});
+
+// When an unblock button is clicked
+$(document).on("click", ".unblock-btn", function () {
+    // Get the user from the data attribute
+    var user_to_unblock = $(this).data("user");
+
+    // Remove the user from the local storage
+    var blocked_users = JSON.parse(localStorage.getItem("blocked_users")) || {};
+    delete blocked_users[user_to_unblock];
+    localStorage.setItem("blocked_users", JSON.stringify(blocked_users));
+
+    // Render the list again
+    renderList(blocked_users);
+});
+
+// A function to render the list of blocked users
+function renderList(blocked_users) {
+    // Clear the list of blocked users
+    $("#blocked_users").empty();
+
+    // Loop through the blocked users
+    for (var user in blocked_users) {
+        // Create a list item with the user and an unblock button
+        var listItem = $(`
             <li style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
             <a href="/user/${user}" class="">${user}</a>
-            <button class="btn mod-action unblockBtn btn" data-user="${user}" style="background-color: #79c38a; width: 50px; margin-right: 570px;">Unblock</button>
+            <button class="btn mod-action unblock-btn btn" data-user="${user}" style="background-color: #79c38a; width: 50px; margin-right: 570px;">Unblock</button>
             </li>`);
+
+        // Append it to the list
+        $("#blocked_users").append(listItem);
+    }
+}
+
+// A function that changes the .post-header-author element with text saying "Blocked User"
+function changePostHeaderAuthor(blockedCard) {
+    // Get the .post-header-author element inside the card
+    var postHeaderAuthor = blockedCard.find(".post-header-author");
+    // Change the text of the element to "Blocked User"
+    postHeaderAuthor.text("Blocked User");
+}
+
+// A function that creates a show post div element
+function createShowPostDiv(originalMessage, postToggle) {
+    // Create a div element with class .show-post and the text "Show Post"
+    var showPostDiv = $("<div></div>").addClass("show-post").text("Show Post");
+    // Add the CSS style to the div element
+    showPostDiv.css({
+        "background-color": "#da626c",
+        "padding": "7px",
+        "border-radius": "5px",
+        "margin-left": "10px",
+        "cursor": "pointer"
+    });
+    // Add a click event listener to the div that triggers a click event on the postToggle element
+    showPostDiv.click(function () {
+        postToggle.click();
+        // Change the text of the div to "Hide Post" or "Show Post" depending on the current text of the div
+        if (showPostDiv.text() === "Show Post") {
+            showPostDiv.text("Hide Post");
+        } else {
+            showPostDiv.text("Show Post");
+        }
+    });
+    // Return the show post div element
+    return showPostDiv;
+}
+
+// A function that adds a div element on the header to show the original message of the blocked post
+function addShowPostDiv(blockedCard) {
+    // Get the .post-header-children element inside the card
+    var postHeaderChildren = blockedCard.find(".post-header-children");
+    // Get the original message element inside the card
+    var originalMessage = blockedCard.find(".post-body");
+    // Get the .js-post-toggle element inside the card
+    var postToggle = blockedCard.find(".js-post-toggle");
+    // Create a show post div element using the original message element and the postToggle element
+    var showPostDiv = createShowPostDiv(originalMessage, postToggle);
+    // Append the show post div element after the postHeaderChildren element
+    postHeaderChildren.after(showPostDiv);
+    // Add a click event listener to the postToggle element that changes the text of the showPostDiv element
+    postToggle.click(function () {
+        // Change the text of the showPostDiv element to "Hide Post" or "Show Post" depending on the visibility of the original message
+        if (originalMessage.is(":hidden")) {
+            showPostDiv.text("Show Post");
+        } else {
+            showPostDiv.text("Hide Post");
+        }
+    });
+}
+
+// A function that collapses every .wf-card containing blocked user and adds a div element to show the original message
+function collapseBlockedCards(blocked_users) {
+    // Loop through the blocked users
+    for (var user in blocked_users) {
+        // Find all the .wf-card elements that contain the user's name
+        var blockedCards = $(`.wf-card:contains('${user}')`);
+        // Loop through each blocked card
+        blockedCards.each(function () {
+            // Get the .js-post-toggle element inside the card
+            var postToggle = $(this).find(".js-post-toggle");
+            // Trigger a click event on the postToggle element to collapse the card
+            postToggle.click();
+            // Change the .post-header-author element with text saying "Blocked User"
+            changePostHeaderAuthor($(this));
+            // Add a div element on the header to show the original message of the blocked post
+            addShowPostDiv($(this));
         });
     }
+}
 
+// When the document is ready
+$(document).ready(function () {
+    // Check if there is a blocked users list in the local storage
+    if (localStorage.getItem("blocked_users")) {
+        // Get the list from the local storage
+        var blocked_users = JSON.parse(localStorage.getItem("blocked_users"));
 
-    for (var i = 0; i < blockedUsers.length; i++) {
-        var postBtns = `<div class="btn mod-action show-post" style="width: 45%; text-align: center; margin: 0px;">Show post</div>
-        <div class="btn mod-action unblock-post" style="width: 45%; text-align: center; margin: 0px;">Unblock</div>`
-        var postNumber = $(`.post-header:contains('${blockedUsers[i]}') > .post-header-num`).text();
-        var postFooter = $(`.post-header:contains('${blockedUsers[i]}')`).next().next().html();
-        var postId = $(`.post-header:contains('${blockedUsers[i]}')`).next().next().next().attr("data-post-id");
-        var stars = `<div class="star mod-0"></div>`
-        var originalPostHeader = $(`.post-header:contains('${blockedUsers[i]}')`).html()
-        var originalPost = $(`.post-header:contains('${blockedUsers[i]}')`).next().html();
-
-        //Hide blocked users posts
-        $(`.post-header:contains('${blockedUsers[i]}')`).parent().replaceWith(`<div class="wf-card post">
-        <div class="blocked-post-toggle post-toggle js-post-toggle noselect"></div>
-        <div class="post-header noselect">
-            <div class="post-header-num">${postNumber}</div>
-            <i class="post-header-flag flag mod-unknown" title="Unknown"></i>
-            <a class="post-header-author mod-vlr">Blocked User</a>
-            <div class="post-header-stars">${stars}${stars}${stars}${stars}</div>
-            <div class="post-header-children"></div>
-        </div>
-        <div class="post-header noselect blocked-post">${originalPostHeader}</div>
-        <div class="post-block-buttons" style="margin: 20px; display: flex; justify-content: space-between;">${postBtns}</div>
-        <div class="post-body blocked-post">${originalPost}</div>
-        <div class="post-footer">${postFooter}</div>
-        <div class="report-form" data-post-id="${postId}"></div>
-        <div class="reply-form" data-post-id="${postId}"></div>
-        </div>`);
+        // Collapse the blocked cards
+        collapseBlockedCards(blocked_users);
     }
-
-    //Handle show/hide post button click
-    $(".show-post").click(function () {
-        $(this).text($(this).text() == 'Hide Post' ? 'Show Post' : 'Hide Post');
-        $(this).parent().prev().prev().toggle();
-        $(this).parent().prev().toggleClass("blocked-post");
-        $(this).parent().next().toggleClass("blocked-post");
-    });
-
-    //Handle unblock post button click
-    $(".unblock-post").click(function () {
-        var unblockPostUser = $(this).parent().prev().find(".post-header-author").text().trim();
-        $(this).attr('data-user', unblockPostUser);
-        var userToUnblock = $(this).data("user");
-        blockedUsers = blockedUsers.filter(function (user) {
-            return user != userToUnblock;
-        });
-        localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
-        renderBlockedUsers();
-        location.reload();
-    });
-
-    //Dont make a block footer button for the user or for already blocked users
-    $('.post-action.reply-btn').each(function () {
-        var idk = $(this).attr("data-author-name");
-        if ($(this).parent().text().indexOf("edit") == -1 && !$(this).closest('.post').find('.post-block-buttons').length) {
-            $(this).before(`<a class="post-action block-btn" data-user="${idk}">block</a>
-            <span class="post-action-div">•</span>`);
-        }
-    });
-
-    // Handle footer block button click
-    $(".post-action.block-btn").click(function () {
-        var userToBlock = $(this).data("user");
-        if (userToBlock) {
-            blockedUsers.push(userToBlock);
-            localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers));
-            renderBlockedUsers();
-        }
-        location.reload();
-    });
-
-    //Make blocked posts collapsable
-    $(".blocked-post-toggle").click(function () {
-        var e = $(this).closest(".threading").children(".threading"),
-            t = $(this).closest(".post"),
-            i = $(this).hasClass("mod-collapsed");
-        if (e.toggle(), $(this).toggleClass("mod-collapsed"), t.toggleClass("mod-collapsed"), !i) {
-            var n = e.find(".post").length,
-                s = t.find(".post-header-children");
-            s.html("(" + n + " children hidden)")
-        }
-    })
 });

@@ -30,7 +30,8 @@ $(document).ready(function () {
         });
     });
 
-    setTimeout(() => {
+    // Define a function that does something with the elements
+    function change_colors() {
         $(".maps_perc_row").find(".mod-supercell").next().each(function () {
             var text = $(this).text().trim();
             var match = text.match(/\d+\.?\d*%/);
@@ -43,5 +44,13 @@ $(document).ready(function () {
                 }
             }
         });
-    }, 2000)
+    }
+
+    // Set an interval to run the function every 100 milliseconds and store it in a variable
+    var interval = setInterval(change_colors, 100);
+
+    // Set a timeout to clear the interval after 5 seconds
+    setTimeout(function () {
+        clearInterval(interval);
+    }, 5000);
 });

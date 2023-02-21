@@ -24,33 +24,33 @@
 
 <!-- ABOUT THE PROJECT -->
 
-[![img](https://i.imgur.com/SNpl1mG.png)](https://github.com/myhiy/BetterVLR)
+<a href="https://github.com/myhiy/BetterVLR"><img src="https://i.imgur.com/sLF5G5L.png" style="border-radius: 5px;"></a>
 
 ## Features
 
 - OP (Original Poster) badge
 
-![img](https://i.imgur.com/9KH0C1B.png)
+<img src="https://i.imgur.com/dMMzsfU.png" style="border-radius: 5px;">
 
 - Image Preview
 
-![img](https://i.imgur.com/5hmV3iA.png)
+<img src="https://i.imgur.com/r23m8sg.png" style="border-radius: 5px;">
 
 - Tweets Preview
 
-![img](https://i.imgur.com/Olnbese.png)
+<img src="https://i.imgur.com/mFX2p5A.png" style="border-radius: 5px;">
 
 - Tooltips
 
-![img](https://i.imgur.com/wiCkmlm.png)
+<img src="https://i.imgur.com/SBQyBEb.png" style="border-radius: 5px;">
 
 - Block users
 
-![img](https://i.imgur.com/3zfrzio.png)
+<img src="https://i.imgur.com/wXlWEmc.png" style="border-radius: 5px;">
 
 - Map Win Percentage
 
-![img](https://i.imgur.com/DlvTT56.png)
+<img src="https://i.imgur.com/jU6mFeK.png" style="border-radius: 5px;">
 
 <!-- CONTRIBUTING -->
 
@@ -65,6 +65,5 @@ Don't forget to give the project a star! Thanks again!
 
 ## Contact
 
-Your Name - [@myhiyy](https://twitter.com/myhiyy) - myhiyyyy@gmail.com
-
-Project Link: [https://github.com/myhiy/BetterVLR](https://github.com/myhiy/BetterVLR)
+twitter: [@myhiyy](https://twitter.com/myhiyy)
+email: myhiyyyy@gmail.com
