@@ -1,7 +1,3 @@
-// Get the username from the header link
-var username = $(".header-nav-item.mod-user").attr("href").split("/user/")[1];
-
-
 // Sentinels logo
 $("img[src*='owcdn.net/img/62875027c8e06.png']").css("border-radius", "3px");
 
@@ -25,9 +21,9 @@ if ($(".thread-header").is(":visible")) {
 }
 
 
-// Define the image links to look for
+// Define image links to look for
 var image_links = 'a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]';
-// Embed images in posts after the link
+// Embed images in posts under the link
 $(document).ready(function () {
     $.each($('.post-body').find(image_links), function (index, element) {
         var img_src = $(this).attr('href');
@@ -79,6 +75,7 @@ tippy('.header-nav-item.mod-stats.mod-vct', {
 });
 
 
+// BetterVLR version changelog under recent discussions
 $.get("https://snippet.host/wfrgud/raw", function (data) {
     $(".js-home-threads").after(data);
     $(".bettervlr-unread").each(function () {
@@ -96,61 +93,4 @@ $.get("https://snippet.host/wfrgud/raw", function (data) {
             });
         }
     });
-});
-
-
-
-
-
-if (window.location.href === "https://www.vlr.gg/settings") {
-    $(document).ready(function () {
-        // Add buttons
-        var buttons = $(`<div id="button-wrapper">
-        <button id="vlr-button">VLR</button>
-        <button id="better-vlr-button">BetterVLR</button>
-        <button id="blocked-users-button">Blocked Users</button>
-        <button id="saved-posts-button">Saved Posts</button>
-        </div>`);
-        $('form:last').before(buttons);
-
-        // Add test div
-        var bettervlr_settings = $('<div id="bettervlr-settings" style="display:none;">Test1</div>');
-        var blocked_users_settings = $(`<div class="wf-card mod-form mod-dark" id="blocked-users-settings" style="display:none;"><form>
-         <div class="form-section" style="margin-top: 0;">Block Users</div><div style="display: flex; justify-content: space-between;">
-           <input type="text" id="user-to-block" placeholder="USER TO BLOCK">
-           <div id="block-btn" class="btn mod-action" style="background-color: #d04e59; width: 50px; margin-right: 570px; text-align: center;">Block</div>
-         </div>
-        
-         <ul id="blocked_users">
-        
-         </ul></form>
-         </div>`);
-        var saved_posts_settings = $('<div id="saved-posts-settings" style="display:none;">Test3</div>');
-        $('form:last').after(bettervlr_settings, blocked_users_settings, saved_posts_settings);
-
-        // Button click handlers
-        $('#vlr-button').on('click', function () {
-            $('form:last').show();
-            $('#bettervlr-settings, #blocked-users-settings, #saved-posts-settings').hide();
-        });
-        $('#better-vlr-button').on('click', function () {
-            $('form:last, #blocked-users-settings, #saved-posts-settings').hide();
-            $('#bettervlr-settings').show();
-        });
-        $('#blocked-users-button').on('click', function () {
-            $('form:last, #bettervlr-settings, #saved-posts-settings').hide();
-            $('#blocked-users-settings').show();
-        });
-        $('#saved-posts-button').on('click', function () {
-            $('form:last, #bettervlr-settings, #blocked-users-settings').hide();
-            $('#saved-posts-settings').show();
-        });
-    });
-}
-
-
-// When the form is submitted
-$(document).on("submit", "#block-btn", function (event) {
-    // Prevent the page from reloading
-    event.preventDefault();
 });

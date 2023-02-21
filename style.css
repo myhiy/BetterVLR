@@ -13,22 +13,6 @@
   color: #fff;
 }
 
-.flag.mod-unknown {
-  background-image: url("https://i.imgur.com/cTWlRQQ.png");
-  background-image: -webkit-image-set(
-    url("https://i.imgur.com/cTWlRQQ.png") 1x,
-    url("https://i.imgur.com/cTWlRQQ.png") 2x
-  );
-  background-image: image-set(
-    "https://i.imgur.com/cTWlRQQ.png" 1x,
-    "https://i.imgur.com/cTWlRQQ.png" 2x
-  );
-}
-
-.blocked-post {
-  display: none !important;
-}
-
 .vct2023 {
   border: 1px solid #fff;
   border-radius: 10px;
