@@ -1,3 +1,16 @@
+// Insert block users category in settings
+$(".wf-card.mod-form:last")
+    .after(`<div class="wf-card mod-form mod-dark">
+<div class="form-section" style="margin-top: 0;">Block Users</div><div style="display: flex; justify-content: space-between;">
+  <input type="text" id="user-to-block" placeholder="USER TO BLOCK">
+  <button id="block-btn" class="btn mod-action" style="background-color: #d04e59; width: 50px; margin-right: 570px;">Block</button>
+</div>
+
+<ul id="blocked_users">
+
+</ul>
+</div>`);
+
 // When the document is ready
 $(document).ready(function () {
     // Check if there is a blocked users list in the local storage
@@ -157,6 +170,62 @@ function collapseBlockedCards(blocked_users) {
     }
 }
 
+// A function that creates a show reply div element
+function createShowReplyDiv(originalMessage, blockedCard) {
+    // Create a div element with class .show-post and the text "Show Reply"
+    var showReplyDiv = $("<div></div>").addClass("show-post").text("Show Reply");
+    // Add the CSS style to the div element
+    showReplyDiv.css({
+        "background-color": "#da626c",
+        "color": "black",
+        "text-align": "center",
+        "padding": "7px",
+        "border-radius": "5px",
+        "margin-left": "10px",
+        "margin-bottom": "10px",
+        "cursor": "pointer"
+    });
+    // Add a click event listener to the div that triggers a click event on the postToggle element
+    showReplyDiv.click(function () {
+        // Change the text of the div to "Hide Post" or "Show Post" depending on the current text of the div
+        if (showReplyDiv.text() === "Show Reply") {
+            $(blockedCard).attr("class", "wf-card post depth-0");
+            showReplyDiv.text("Hide Reply");
+        } else {
+            $(blockedCard).attr("class", "wf-card post depth-0 mod-collapsed");
+            showReplyDiv.text("Show Reply");
+        }
+    });
+    // Return the show post div element
+    return showReplyDiv;
+}
+
+function addShowReplyDiv(blockedCard) {
+    // Get the post-body element inside the card
+    var replyBody = blockedCard.find(".post-body");
+    // Get the original message element inside the card
+    var originalMessage = blockedCard.find(".post-body");
+    // Create a show reply div element using the original message element and the blockedCard
+    var showReplyDiv = createShowReplyDiv(originalMessage, blockedCard);
+    // Append the show reply div element after the post-body element
+    replyBody.after(showReplyDiv);
+}
+
+function collapseBlockedReplies(blocked_users) {
+    // Loop through the blocked users 
+    for (var user in blocked_users) {
+        // Find all the .wf-card elements that contain the user's name
+        var blockedCards = $(`.wf-card:contains('${user}')`);
+        // Loop through each blocked card
+        blockedCards.each(function () {
+            // Change the card to a collapsed card.
+            $(this).attr("class", "wf-card post depth-0 mod-collapsed");
+            // Add a div element on the header to show the original message of the blocked post
+            addShowReplyDiv($(this));
+        });
+    }
+}
+
 // When the document is ready
 $(document).ready(function () {
     // Check if there is a blocked users list in the local storage
@@ -166,5 +235,10 @@ $(document).ready(function () {
 
         // Collapse the blocked cards
         collapseBlockedCards(blocked_users);
+        
+        // Collapse blocked messages if accessing inbox
+        if ($(document.body).attr("data-ctrl") == "inbox") {
+            collapseBlockedReplies(blocked_users);
+        }
     }
 });

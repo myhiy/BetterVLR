@@ -1,3 +1,8 @@
+// Get the username from the header link
+var username = $(".header-nav-item.mod-user")
+    .attr("href")
+    .split("/user/")[1];
+
 // Sentinels logo
 $("img[src*='owcdn.net/img/62875027c8e06.png']").css("border-radius", "3px");
 
