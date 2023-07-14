@@ -1,0 +1,28 @@
+{
+  "name": "BetterVLR",
+  "description": "VLR.GG but better",
+  "version": "0.0.5",
+  "manifest_version": 3,
+  "icons": {
+    "128": "logo.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{58584ae4-c748-4e39-bbb9-a96980da62cd}"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.vlr.gg/*"],
+      "js": ["content.js"],
+      "css": ["bettervlr.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "run_at": "document_start",
+      "matches": ["*://*.vlr.gg/*"],
+      "resources": ["bettervlr.js"]
+    }
+  ]
+}

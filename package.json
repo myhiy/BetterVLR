@@ -1,0 +1,38 @@
+{
+  "name": "bettervlr",
+  "version": "0.0.5",
+  "description": "VLR.GG but better",
+  "homepage": "https://bettervlr.com",
+  "bugs": {
+    "url": "https://github.com/myhiy/BetterVLR/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myhiy/BetterVLR.git"
+  },
+  "author": "myhiy",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --watch --config webpack.dev.js"
+  },
+  "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
+    "@picmo/popup-picker": "^5.8.4",
+    "emoji-mart": "^5.5.2",
+    "inline-attachment": "^2.0.3",
+    "magnific-popup": "^1.1.0",
+    "tippy.js": "^6.3.7",
+    "twemoji": "^14.0.2"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.87.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.9.0"
+  }
+}
