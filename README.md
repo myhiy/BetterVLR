@@ -2,7 +2,7 @@
 <br/>
 <div align="center">
   <a href="https://github.com/myhiy/BetterVLR">
-    <img src="logo.png" alt="Logo" width="80" height="80">
+    <img src="public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">BetterVLR</h3>
@@ -29,6 +29,18 @@
 <details>
 <summary>Click to expand</summary><br></br>
 
+- Map Win Percentage
+
+<img src="https://i.imgur.com/jU6mFeK.png" style="border-radius: 5px;">
+
+- Past Players
+
+<img src="https://i.imgur.com/5EhajyN.png" style="border-radius: 5px;">
+
+- Highlight teams in the bracket
+
+<img src="https://i.imgur.com/OLYpFUA.png" style="border-radius: 5px;">
+
 - OP (Original Poster) badge
 
 <img src="https://i.imgur.com/dMMzsfU.png" style="border-radius: 5px;">
@@ -45,13 +57,9 @@
 
 <img src="https://i.imgur.com/SBQyBEb.png" style="border-radius: 5px;">
 
-- Block users
+- Block Users
 
 <img src="https://i.imgur.com/wXlWEmc.png" style="border-radius: 5px;">
-
-- Map Win Percentage
-
-<img src="https://i.imgur.com/jU6mFeK.png" style="border-radius: 5px;">
 
 </details>
 
