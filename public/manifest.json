@@ -3,6 +3,7 @@
   "description": "VLR.GG but better",
   "version": "0.0.5",
   "manifest_version": 3,
+  "homepage_url": "https://bettervlr.com",
   "icons": {
     "128": "logo.png"
   },
