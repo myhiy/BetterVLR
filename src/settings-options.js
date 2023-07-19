@@ -1,14 +1,14 @@
 // Function to hide or show elements based on checkbox values
-function toggleElementsVisibility() {
+function applySettings() {
     var settings = JSON.parse(localStorage.getItem("settings")) || {};
     var hide_flags = settings.hide_flags;
     var hide_stars = settings.hide_stars;
     var esports_mode = settings.esports_mode;
     var sticky_header = settings.sticky_header;
-    var hide_match_comments = settings.match_comments;
-    var hide_live_streams = settings.live_streams;
-    var hide_stickied_threads = settings.stickied_threads;
-    var hide_recent_discussions = settings.recent_discussions;
+    var hide_match_comments = settings.hide_match_comments;
+    var hide_live_streams = settings.hide_live_streams;
+    var hide_stickied_threads = settings.hide_stickied_threads;
+    var hide_recent_discussions = settings.hide_recent_discussions;
     var imgur_proxy = settings.imgur_proxy;
 
 
@@ -69,12 +69,12 @@ function toggleElementsVisibility() {
 }
 
 // Function to save checkbox value in localstorage
-function saveCheckboxValue(checkboxId) {
+function saveCheckboxValue(checkbox_id) {
     var settings = JSON.parse(localStorage.getItem("settings")) || {};
-    settings[checkboxId] = $("#" + checkboxId).is(":checked");
+    settings[checkbox_id] = $("#" + checkbox_id).is(":checked");
     localStorage.setItem("settings", JSON.stringify(settings));
 
-    toggleElementsVisibility(); // Update visibility after saving checkbox value
+    applySettings(); // Update visibility after saving checkbox value
 }
 
 // Function to load checkbox values from localstorage
@@ -84,21 +84,21 @@ function loadCheckboxValues() {
     $("#hide_stars").prop("checked", settings.hide_stars);
     $("#esports_mode").prop("checked", settings.esports_mode);
     $("#sticky_header").prop("checked", settings.sticky_header);
-    $("#match_comments").prop("checked", settings.match_comments);
-    $("#live_streams").prop("checked", settings.live_streams);
-    $("#stickied_threads").prop("checked", settings.stickied_threads);
-    $("#recent_discussions").prop("checked", settings.recent_discussions);
+    $("#match_comments").prop("checked", settings.hide_match_comments);
+    $("#live_streams").prop("checked", settings.hide_live_streams);
+    $("#stickied_threads").prop("checked", settings.hide_stickied_threads);
+    $("#recent_discussions").prop("checked", settings.hide_recent_discussions);
     $("#imgur_proxy").prop("checked", settings.imgur_proxy);
 }
 
 // Event listener for checkboxes
 $(`.wf-card input[type="checkbox"]`).on("change", function () {
-    var checkboxId = $(this).attr("id");
-    saveCheckboxValue(checkboxId);
+    var checkbox_id = $(this).attr("id");
+    saveCheckboxValue(checkbox_id);
 });
 
 // Load checkbox values from localstorage
 $(document).ready(function () {
     loadCheckboxValues();
-    toggleElementsVisibility();
+    applySettings();
 });
