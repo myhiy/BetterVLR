@@ -192,6 +192,13 @@ label img {
   cursor: pointer;
 }
 
+/* CSS for everything below 550px */
+@media (max-width: 550px) {
+  .post-body img:not(.emoji, .custom-emoji) {
+    max-width: 100%;
+  }
+}
+
 .post-body iframe {
   display: block;
 }
