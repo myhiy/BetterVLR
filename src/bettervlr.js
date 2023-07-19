@@ -66,10 +66,42 @@ $(".bracket-item-team-name").hover(function () {
 
 
 // ANCHOR Show BetterVLR changelog under recent discussions
-$.get("https://snippet.host/wfrgud/raw", function (data) {
-    $(".js-home-threads").after(data);
+$(".js-home-threads").after(`
+<div class="js-home-changelog">
+    <a href="https://bettervlr.com" target="_blank" class="wf-label mod-sidebar">BetterVLR</a>
+    <div class="wf-card mod-dark mod-sidebar" id="bettervlr-changelog"></div>
+</div>`);
+
+$.getJSON("https://json.link/qhUt3PM04f.json", function (data) {
+    populateChangelog();
+
+    function populateChangelog() {
+        var changelog = $("#bettervlr-changelog");
+        var last_item = data.changelog.length - 1;
+
+        $.each(data.changelog, function (index, entry) {
+            var changelog_item = $("<a>").attr("href", entry.link).addClass("wf-module-item mod-disc bettervlr-unread");
+
+            if (index === 0) {
+                changelog_item.addClass("mod-first");
+            }
+
+            var changelog_title = $("<div>").addClass("module-item-title").text(entry.title);
+            var changelog_version = $("<div>").addClass("version").text(entry.version);
+
+            if (index === last_item) {
+                changelog_version.hide();
+                var release_text = $("<div>").text("RELEASE");
+                changelog_version.after(release_text);
+            }
+
+            changelog_item.append(changelog_title, changelog_version);
+            changelog.append(changelog_item);
+        });
+    }
+
     $(".bettervlr-unread").each(function () {
-        const version = $(this).text().replace(/\s+/g, " ").trim();
+        const version = $(this).find(".version").text();
         const changelog_read = JSON.parse(localStorage.getItem("changelog_read")) || {};
         if (changelog_read[version]) {
             $(this).removeClass("bettervlr-unread");
