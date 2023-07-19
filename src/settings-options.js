@@ -1,4 +1,4 @@
-// Function to hide or show elements based on checkbox values
+// Function to apply settings based on checkbox values
 function applySettings() {
     var settings = JSON.parse(localStorage.getItem("settings")) || {};
     var hide_flags = settings.hide_flags;
@@ -84,10 +84,10 @@ function loadCheckboxValues() {
     $("#hide_stars").prop("checked", settings.hide_stars);
     $("#esports_mode").prop("checked", settings.esports_mode);
     $("#sticky_header").prop("checked", settings.sticky_header);
-    $("#match_comments").prop("checked", settings.hide_match_comments);
-    $("#live_streams").prop("checked", settings.hide_live_streams);
-    $("#stickied_threads").prop("checked", settings.hide_stickied_threads);
-    $("#recent_discussions").prop("checked", settings.hide_recent_discussions);
+    $("#hide_match_comments").prop("checked", settings.hide_match_comments);
+    $("#hide_live_streams").prop("checked", settings.hide_live_streams);
+    $("#hide_stickied_threads").prop("checked", settings.hide_stickied_threads);
+    $("#hide_recent_discussions").prop("checked", settings.hide_recent_discussions);
     $("#imgur_proxy").prop("checked", settings.imgur_proxy);
 }
 
