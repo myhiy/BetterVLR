@@ -205,7 +205,7 @@ label img {
 }
 
 /* ANCHOR Emoji picker */
-#popup {
+em-emoji-picker {
   position: fixed;
   z-index: 999;
 }
