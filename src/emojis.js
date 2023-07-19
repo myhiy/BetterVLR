@@ -157,6 +157,7 @@ $.getJSON("https://7tv.io/v3/emote-sets/64aa3859c7d082e76f7248c8", function (cus
       $(picker).show();
 
       const picker_input = picker.shadowRoot.querySelector("input");
+      picker_input.value = "";
       picker_input.focus({ preventScroll: true });
     }
   }
