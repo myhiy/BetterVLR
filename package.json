@@ -20,7 +20,7 @@
     "@picmo/popup-picker": "^5.8.4",
     "emoji-mart": "^5.5.2",
     "inline-attachment": "^2.0.3",
-    "magnific-popup": "^1.1.0",
+    "magnific-popup": "github:myhiy/magnific-popup",
     "tippy.js": "^6.3.7",
     "twemoji": "^14.0.2"
   },
