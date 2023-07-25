@@ -17,6 +17,7 @@ import "./past-players.js";
 import "./profile-page.js";
 import "./textarea-images.js";
 import "./polls.js";
+import "./word-block.js";
 
 
 // ANCHOR OP badge
