@@ -472,3 +472,16 @@ span.emoji-preview.selected {
     margin-right: 0px;
   }
 }
+
+/* ANCHOR Blocked words */
+.word-block-blur {
+  filter: blur(3px);
+}
+
+.word-block-blur:hover {
+  filter: blur(0px);
+}
+
+.js-home-threads .wf-module-item:hover > .word-block-blur {
+  filter: blur(0px);
+}
