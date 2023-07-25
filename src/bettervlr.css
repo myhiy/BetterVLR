@@ -465,3 +465,10 @@ span.emoji-preview.selected {
     margin-top: 10px;
   }
 }
+
+@media (max-width: 720px) {
+  #block-user,
+  #block-word {
+    margin-right: 0px;
+  }
+}
