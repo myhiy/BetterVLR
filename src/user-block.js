@@ -16,7 +16,7 @@ $(document).ready(function () {
 });
 
 // When the block button is clicked
-$(document).on("click", "#block-btn", function (event) {
+$(document).on("click", "#block-user", function (event) {
     event.preventDefault();
     var userToBlock = $("#user-to-block").val().trim();
 
