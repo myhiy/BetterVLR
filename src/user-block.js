@@ -12,6 +12,7 @@ $(document).ready(function () {
         // Render the list
         renderList(blocked_users);
         collapseBlockedCards(blocked_users);
+        collapseBlockedCardsInbox(blocked_users);
     }
 });
 
@@ -130,4 +131,45 @@ function addShowPostDiv(blockedCard, originalAuthor) {
     var postToggle = blockedCard.find(".js-post-toggle");
     var showPostDiv = createShowPostDiv(originalMessage, postToggle, originalAuthor);
     postHeaderChildren.after(showPostDiv);
+}
+
+function collapseBlockedCardsInbox(blockedUsers) {
+    if (window.location.href.startsWith("https://www.vlr.gg/inbox")) {
+        for (var user in blockedUsers) {
+            var blockedCards = $(`.wf-card:contains('${user}')`);
+            blockedCards.each(function () {
+                var original_author = $(this).find("a:eq(1)").text();
+                $(this).find("a:eq(1)").text("Blocked User");
+                $(this).find(".post-body").hide();
+
+                var show_post_div = $("<div>").addClass("show-post").text("Show Post");
+                show_post_div.css({
+                    "background-color": "#da626c",
+                    "padding": "7px",
+                    "border-radius": "5px",
+                    "margin": "10px",
+                    "cursor": "pointer",
+                    "position": "absolute",
+                    "top": "0px",
+                    "right": "0px",
+                });
+
+                var wrapper = $("<div>").css("position", "relative");
+                $(this).wrap(wrapper);
+                $(this).after(show_post_div);
+
+                show_post_div.on("click", function () {
+                    if (show_post_div.text() === "Show Post") {
+                        show_post_div.text("Hide Post");
+                        $(this).parent().find("a:eq(1)").text(original_author);
+                        $(this).parent().find(".post-body").show();
+                    } else {
+                        show_post_div.text("Show Post");
+                        $(this).parent().find("a:eq(1)").text("Blocked User");
+                        $(this).parent().find(".post-body").hide();
+                    }
+                });
+            });
+        }
+    }
 }
