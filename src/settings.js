@@ -118,6 +118,14 @@ const blocked_words = `
 	<div class="form-section" style="margin: 0;">Block Words</div>
 	<div style="display: flex; justify-content: space-between; padding: 15px 20px 15px 0; flex-wrap: wrap; gap: 5px;">
 		<input type="text" id="word-to-block" placeholder="WORD TO BLOCK" style="margin: 0px">
+		<div>
+			<div class="wf-label comments-label" style="margin-right: 12px; padding: 0;">BLOCK WORD IN:</div>
+			<select id="block-option" style="margin: 0;">
+				<option value="Thread Title">Thread Title</option>
+				<option value="Posts">Posts</option>
+				<option value="Both">Both</option>
+			</select>
+		</div>
 		<button id="block-word" class="btn mod-action" style="background-color: #d04e59; width: 50px;">Block</button>
 	</div>
 	<ul id="blocked_words"></ul>
