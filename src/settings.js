@@ -11,8 +11,8 @@ if (window.location.href.startsWith("https://www.vlr.gg/settings")) {
 			<a class="wf-nav-item" href="https://www.vlr.gg/settings?bettervlr">
 				<div class="wf-nav-item-title">BetterVLR</div>
 			</a>
-			<a class="wf-nav-item" href="https://www.vlr.gg/settings?blocked-users">
-				<div class="wf-nav-item-title">Blocked Users</div>
+			<a class="wf-nav-item" href="https://www.vlr.gg/settings?block-list">
+				<div class="wf-nav-item-title">Block List</div>
 			</a>
 		</div>
 	</div>`;
@@ -113,7 +113,7 @@ const blocked_users = `
 	<ul id="blocked_users"></ul>
 </div>`;
 
-if (window.location.search === "?blocked-users") {
+if (window.location.search === "?block-list") {
 	$(".wf-card.mod-form").not("form .wf-card.mod-form").hide();
 	const form = $("form:eq(1)");
 	form.html(blocked_users);
