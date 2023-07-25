@@ -203,10 +203,6 @@ label img {
   display: block;
 }
 
-.post-preview {
-  background-color: #40474f;
-}
-
 .post-editor-header-action {
   cursor: pointer !important;
 }
