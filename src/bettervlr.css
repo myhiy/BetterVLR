@@ -444,3 +444,24 @@ span.emoji-preview.selected {
 .header-menu-switch:first-of-type {
   border-top: 1px solid #5b6167;
 }
+
+/* ANCHOR Block list settings */
+.selector {
+  position: relative;
+}
+
+.selector > .wf-label {
+  position: absolute;
+  bottom: 100%;
+}
+
+/* CSS for everything below 748px */
+@media (max-width: 748px) {
+  .selector > .wf-label {
+    position: initial;
+  }
+
+  #block-word {
+    margin-top: 10px;
+  }
+}
