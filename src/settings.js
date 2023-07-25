@@ -108,13 +108,23 @@ const blocked_users = `
 	<div class="form-section" style="margin: 0;">Block Users</div>
 	<div style="display: flex; justify-content: space-between; padding: 15px 20px 15px 0; flex-wrap: wrap; gap: 5px;">
 		<input type="text" id="user-to-block" placeholder="USER TO BLOCK" style="margin: 0px">
-		<button id="block-btn" class="btn mod-action" style="background-color: #d04e59; width: 50px;">Block</button>
+		<button id="block-user" class="btn mod-action" style="background-color: #d04e59; width: 50px;">Block</button>
 	</div>
 	<ul id="blocked_users"></ul>
+</div>`;
+
+const blocked_words = `
+<div class="wf-card mod-form mod-dark">
+	<div class="form-section" style="margin: 0;">Block Words</div>
+	<div style="display: flex; justify-content: space-between; padding: 15px 20px 15px 0; flex-wrap: wrap; gap: 5px;">
+		<input type="text" id="word-to-block" placeholder="WORD TO BLOCK" style="margin: 0px">
+		<button id="block-word" class="btn mod-action" style="background-color: #d04e59; width: 50px;">Block</button>
+	</div>
+	<ul id="blocked_words"></ul>
 </div>`;
 
 if (window.location.search === "?block-list") {
 	$(".wf-card.mod-form").not("form .wf-card.mod-form").hide();
 	const form = $("form:eq(1)");
-	form.html(blocked_users);
+	form.html(blocked_users + blocked_words);
 }
