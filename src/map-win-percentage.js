@@ -11,9 +11,15 @@ $(document).ready(function () {
         const team2 = $("a.match-header-link.wf-link-hover.mod-2").attr("href");
         const teams = [team1, team2];
 
+        var current_date = new Date()
+        current_date.setMonth(current_date.getMonth() - 3);
+        // add 0 if month is not 2 digits
+        var two_digit_month = current_date.getMonth() < 9 ? "0" + (current_date.getMonth() + 1) : (current_date.getMonth() + 1);
+        var current_date_formatted = current_date.getFullYear() + "-" + two_digit_month + "-" + current_date.getDate();
+
         teams.forEach(function (team, index) {
             if (team) { // Add null-check
-                $.get("https://www.vlr.gg/team/stats/" + team.substring(6))
+                $.get("https://www.vlr.gg/team/stats/" + team.substring(6) + "?date_start=" + current_date_formatted)
                     .done(function (data) {
                         const table = $(data).find(".wf-table").parent(".mod-table");
                         table.find(".mod-def").remove();
