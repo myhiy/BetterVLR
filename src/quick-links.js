@@ -127,12 +127,17 @@ $(".header-menu-item:first").before(`
 <a class="header-menu-item quick-link" href="/transfers">Transfers</a>`);
 
 $(document).on("click", ".header-menu-item.dropdown", function () {
-	$(".header-menu-item.dropdown i").attr("class", "fa fa-chevron-down");
-	$(".header-menu-item.quick-link").css("display", "block");
-	$(".header-menu-item.quick-link").css("border-left", "2px solid");
-	$(".header-menu-item.quick-link").css("border-right", "52px solid");
-	$(".header-menu-item.quick-link:first").css("border-top", "2px solid");
-	$(".header-menu-item.quick-link:last").css("border-bottom", "2px solid");
+	if ($(".header-menu-item.quick-link").is(":visible")) {
+		$(".header-menu-item.dropdown i").attr("class", "fa fa-chevron-right");
+		$(".header-menu-item.quick-link").css("display", "none");
+	} else {
+		$(".header-menu-item.dropdown i").attr("class", "fa fa-chevron-down");
+		$(".header-menu-item.quick-link").css("display", "block");
+		$(".header-menu-item.quick-link").css("border-left", "2px solid");
+		$(".header-menu-item.quick-link").css("border-right", "52px solid");
+		$(".header-menu-item.quick-link:first").css("border-top", "2px solid");
+		$(".header-menu-item.quick-link:last").css("border-bottom", "2px solid");
+	}
 });
 
 displayQuickLinks();
