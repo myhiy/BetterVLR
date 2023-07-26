@@ -70,6 +70,32 @@
   gap: 10px;
 }
 
+/* ANCHOR Navbar dropdown mobile */
+@media (max-width: 720px) {
+  .header-nav-item.dropdown {
+    display: none;
+  }
+
+  .header-div:nth-child(17),
+  .header-div:nth-child(17):after {
+    display: none;
+  }
+}
+
+@media (min-width: 720px) {
+  .header-menu-item.dropdown {
+    display: none;
+  }
+}
+
+.header-menu-item.dropdown i {
+  display: inline-block;
+}
+
+.header-menu-item.quick-link {
+  display: none;
+}
+
 /* ANCHOR Tab outline */
 :focus-visible {
   outline: 2px solid #ff5461;

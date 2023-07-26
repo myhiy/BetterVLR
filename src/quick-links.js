@@ -27,12 +27,20 @@ function removeQuickLink(event) {
 function displayQuickLinks() {
 	const quick_links = JSON.parse(localStorage.getItem("quick_links")) || [];
 	const dropdown_content = $(".dropdown-content");
+	const dropdown_content_mobile = $(".header-menu-item.quick-link:last");
 
 	// Loop through the quick links and append them to the dropdown menu
 	quick_links.forEach((quick_link) => {
 		const { image, text, href } = quick_link;
 		const quick_link_item = $(`<a class="wf-module-item" href="${href}"><img src="${image}" />${text}</a>`);
 		dropdown_content.append(quick_link_item);
+	});
+
+	// Loop through the quick links and append them to the dropdown menu (mobile)
+	quick_links.forEach((quick_link) => {
+		const { text, href } = quick_link;
+		const quick_link_item = $(`<a class="header-menu-item quick-link" href="${href}">${text}</a>`);
+		dropdown_content_mobile.after(quick_link_item);
 	});
 }
 
@@ -101,7 +109,6 @@ $(".header-nav-item.mod-stats").next().after(`
 </div>
 <div class="header-div"></div>`);
 $(".header-nav-item.mod-vlr-spacing").css("width", "107px");
-displayQuickLinks();
 
 $(".header-switch, .mod-dropdown").attr("tabindex", "0");
 $(".header-switch, .mod-dropdown").on("keydown", function (event) {
@@ -109,6 +116,26 @@ $(".header-switch, .mod-dropdown").on("keydown", function (event) {
 		$(this).trigger("click");
 	}
 });
+
+// mobile
+$(".header-menu-item:first").before(`
+<div class="header-menu-item dropdown">
+	<i class="fa fa-chevron-right"></i> Quick Links</div>
+<a class="header-menu-item quick-link" href="/vct-2023">VCT 2023</a>
+<a class="header-menu-item quick-link" href="/vct-2022">VCT 2022</a>
+<a class="header-menu-item quick-link" href="/vct-2021">VCT 2021</a>
+<a class="header-menu-item quick-link" href="/transfers">Transfers</a>`);
+
+$(document).on("click", ".header-menu-item.dropdown", function () {
+	$(".header-menu-item.dropdown i").attr("class", "fa fa-chevron-down");
+	$(".header-menu-item.quick-link").css("display", "block");
+	$(".header-menu-item.quick-link").css("border-left", "2px solid");
+	$(".header-menu-item.quick-link").css("border-right", "52px solid");
+	$(".header-menu-item.quick-link:first").css("border-top", "2px solid");
+	$(".header-menu-item.quick-link:last").css("border-bottom", "2px solid");
+});
+
+displayQuickLinks();
 
 
 const quick_links_popup = ({
