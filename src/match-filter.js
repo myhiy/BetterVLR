@@ -79,10 +79,44 @@ $(document).ready(function () {
     }
 
     // Call the function for each checkbox with specified country codes
-    filterRegions($("#americas"), ["us"]);
-    filterRegions($("#emea"), ["eu"]);
-    filterRegions($("#pacific"), ["kr"]);
-    filterRegions($("#china"), ["cn"]);
+    // https://gist.github.com/richjenks/15b75f1960bc3321e295
+    filterRegions($("#americas"), [
+        "as", "ai", "ag", "ar", "aw", "bs", "bb", "bz", "bm", "bo", "bq", "br",
+        "io", "ca", "ky", "cl", "co", "cr", "cu", "cw", "dm", "do", "ec", "sv",
+        "fk", "fo", "gf", "pf", "tf", "gd", "gp", "gu", "gt", "gg", "gy", "ht",
+        "hm", "hn", "jm", "je", "ki", "kv", "kr", "mq", "mx", "ms", "nc", "ni",
+        "nu", "nf", "mp", "pa", "pg", "py", "pe", "pn", "pr", "bl", "kn", "lc",
+        "mf", "pm", "vc", "ws", "sx", "sr", "tk", "to", "tt", "tc", "tv", "um",
+        "us", "uy", "vg", "vi", "wf"
+    ]);
+    filterRegions($("#emea"), [
+        "eu", "af", "ax", "al", "dz", "ad", "ao", "aq", "ag", "ar", "am", "at",
+        "az", "bh", "bd", "by", "be", "bj", "bm", "bt", "ba", "bw", "bv", "br",
+        "bn", "bg", "bf", "bi", "cv", "kh", "cm", "ca", "cf", "td", "cx", "cc",
+        "co", "km", "cd", "cg", "ck", "hr", "cy", "cz", "dk", "dj", "ec", "eg",
+        "gq", "er", "ee", "et", "fk", "fo", "fi", "fr", "ga", "gm", "ge", "de",
+        "gh", "gi", "gr", "gl", "gn", "gw", "hk", "hu", "is", "in", "ir", "iq",
+        "ie", "im", "il", "it", "jp", "jo", "kz", "ke", "kw", "kg", "la", "lv",
+        "lb", "ls", "lr", "ly", "li", "lt", "lu", "mo", "mk", "mg", "mw", "my",
+        "mv", "ml", "mt", "mh", "mq", "mr", "mu", "yt", "mx", "fm", "md", "mc",
+        "mn", "me", "ms", "ma", "mz", "mm", "na", "nr", "np", "nl", "nc", "nz",
+        "ni", "ne", "ng", "nu", "nf", "mp", "no", "om", "pk", "pw", "ps", "pa",
+        "pg", "py", "pe", "ph", "pn", "ws", "sm", "st", "sa", "sn", "rs", "sc",
+        "sl", "sg", "sx", "sk", "si", "sb", "so", "za", "gs", "ss", "es", "lk",
+        "sd", "sj", "sz", "se", "ch", "sy", "tw", "tj", "tz", "th", "tl", "tg",
+        "tk", "to", "tn", "tr", "tm", "tv", "ug", "ua", "ae", "gb", "eh", "ye",
+        "zm", "zw"
+    ]);
+    filterRegions($("#pacific"), [
+        "as", "au", "bd", "bn", "kh", "cx", "cc", "ck", "fj", "pf", "gu", "hk",
+        "in", "id", "jp", "ki", "kv", "kr", "la", "my", "mv", "mh", "fm", "mn",
+        "mm", "nr", "np", "nc", "nz", "nu", "nf", "mp", "pk", "pw", "ps", "pa",
+        "pg", "ph", "pn", "ws", "sg", "sb", "gs", "tw", "tj", "th", "tl", "tk",
+        "to", "tv", "vu", "vn", "wf"
+    ]);
+    filterRegions($("#china"), [
+        "cn"
+    ]);
 });
 
 
