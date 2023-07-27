@@ -507,3 +507,29 @@ span.emoji-preview.selected {
 .js-home-threads .wf-module-item:hover > .word-block-blur {
   filter: blur(0px);
 }
+
+/* ANCHOR Match filter */
+#regions-filter,
+#events-filter {
+  margin: 0px;
+}
+
+.js-home-matches-upcoming,
+.js-home-events {
+  margin-top: 47px;
+}
+
+#regions-filter-content,
+#events-filter-content {
+  display: none;
+  border-radius: 0 0 3px 3px;
+}
+
+#regions-filter-content label,
+#events-filter-content label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  gap: 5px;
+}
