@@ -1,69 +1,36 @@
-<!-- PROJECT LOGO -->
-<br/>
-<div align="center">
-  <a href="https://github.com/myhiy/BetterVLR">
-    <img src="public/logo.png" alt="Logo" width="80" height="80">
-  </a>
+# BetterVLR
 
-  <h3 align="center">BetterVLR</h3>
-  <p align="center">
-    VLR but better!
-    <p align="center">
-      <a href="https://chrome.google.com/webstore/detail/bettervlr/cmdelclhhmllfeciclafkfafhcjggple"><img src="https://i.imgur.com/b6al3Pc.png"></a>
-      <a href="https://addons.mozilla.org/firefox/addon/bettervlr"><img src="https://i.imgur.com/xIe2Ak9.png"></a>
-    </p>
-    <a href="https://github.com/myhiy/BetterVLR#features">View Features</a>
-    ·
-    <a href="https://github.com/myhiy/BetterVLR/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/myhiy/BetterVLR/issues">Request Feature</a>
-  </p>
-</div>
+VLR.GG but better!
 
-<!-- ABOUT THE PROJECT -->
+[![Download Button](https://i.imgur.com/mhV5X8a.png)](https://bettervlr.com/download)
 
-<a href="https://github.com/myhiy/BetterVLR"><img src="https://i.imgur.com/sLF5G5L.png" style="border-radius: 5px;"></a>
-
-## Features
+### AVAILABLE FOR:
 
 <details>
-<summary>Click to expand</summary><br></br>
 
-- Map Win Percentage
+###
 
-<img src="https://i.imgur.com/jU6mFeK.png" style="border-radius: 5px;">
+```
+All chromium browsers
+```
 
-- Past Players
+```
+Firefox
+```
 
-<img src="https://i.imgur.com/5EhajyN.png" style="border-radius: 5px;">
+```
+Safari
+```
 
-- Highlight teams in the bracket
-
-<img src="https://i.imgur.com/OLYpFUA.png" style="border-radius: 5px;">
-
-- OP (Original Poster) badge
-
-<img src="https://i.imgur.com/dMMzsfU.png" style="border-radius: 5px;">
-
-- Image Preview
-
-<img src="https://i.imgur.com/r23m8sg.png" style="border-radius: 5px;">
-
-- Tweets Preview
-
-<img src="https://i.imgur.com/mFX2p5A.png" style="border-radius: 5px;">
-
-- Tooltips
-
-<img src="https://i.imgur.com/SBQyBEb.png" style="border-radius: 5px;">
-
-- Block Users
-
-<img src="https://i.imgur.com/wXlWEmc.png" style="border-radius: 5px;">
+```
+Android
+```
 
 </details>
 
-<!-- CONTRIBUTING -->
+###
+
+![Banner](https://i.imgur.com/sLF5G5L.png)
 
 ## Contributing
 
@@ -72,9 +39,7 @@ Contributions are what make the open source community such an amazing place to l
 If you have a suggestion that would make this better, please create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
 
-<!-- CONTACT -->
-
 ## Contact
 
-twitter: [@myhiyy](https://twitter.com/myhiyy)
-email: myhiyyyy@gmail.com
+- Twitter: [@myhiyy](https://twitter.com/myhiyy)
+- Email: myhiyyyy@gmail.com
