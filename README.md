@@ -30,7 +30,7 @@ Android
 
 ###
 
-![Banner](https://i.imgur.com/sLF5G5L.png)
+![Banner](https://i.imgur.com/8mfFGQT.png)
 
 ## Contributing
 
