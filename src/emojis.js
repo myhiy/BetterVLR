@@ -93,7 +93,7 @@ $(document).on("click", ".post-editor-header-preview", function () {
 });
 
 function getTheme() {
-  if ($(".js-dark-switch .on").css("display") !== "none") { return "dark" } else { return "light" }
+  if ($("body").hasClass("ui-color-dark")) { return "dark" } else { return "light" }
 }
 
 // Add emoji picker button
