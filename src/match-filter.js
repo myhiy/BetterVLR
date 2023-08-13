@@ -71,7 +71,7 @@ $(document).ready(function () {
 
             match_selector.each(function () {
                 const flag = $(this).find(country_selectors);
-                if (flag.length > 0) {
+                if (flag.length > 1) {
                     $(this).css("display", checkbox.is(":checked") ? "block" : "none");
                 }
             });
