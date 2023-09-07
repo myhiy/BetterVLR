@@ -14,6 +14,4 @@ const side = document.body.querySelector(".desktop-only");
 const up = document.body.querySelector('[data-space="desktop_hero"]');
 side.remove()
 up.remove()
-
-console.log('test')
 })();
