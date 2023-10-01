@@ -19,6 +19,7 @@ import "./textarea-images.js";
 import "./polls.js";
 import "./word-block.js";
 import "./match-filter.js";
+import "./trophies.js"
 
 
 // ANCHOR OP badge
