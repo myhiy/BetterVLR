@@ -32,7 +32,7 @@ function parseCustomEmojis(selector) {
         });
     });
 }
-parseCustomEmojis(".post-body *");
+parseCustomEmojis(".post-body * *");
 
 // Convert emojis in post preview
 $(document).on("click", ".post-editor-header-preview", function () {
