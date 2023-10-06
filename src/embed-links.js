@@ -18,11 +18,9 @@ $(document).one("click", post_images, function () {
 
 
 // convert image links to embedded images in posts
-const image_links = `a[href$=".jpg"], a[href*=".jpg?"], a[href$=".jpeg"], a[href*=".jpeg?"], a[href$=".png"], a[href*=".png?"], a[href$=".gif"], a[href*=".gif?"]`;
-
-$(".post-body").find(image_links).each(function () {
+$(".post-body").find("a").each(function () {
     const img_src = this.href;
-    $(this).parent().append(`<img class="post-image" src="${img_src}" href="${img_src}" onerror="$(this).hide();">`);
+    $(this).parent().append(`<img class="post-image" style="display:none" src="${img_src}" href="${img_src}" onload="$(this).show();">`);
 });
 
 // twitter
