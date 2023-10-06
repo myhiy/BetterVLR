@@ -313,6 +313,18 @@ $(yt).each(function () {
                 $(link).next().find(".embed-video").one("click", function () {
                     $(this).html(`<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" allowfullscreen></iframe>`);
                 });
+            },
+            error: function (jqXHR) {
+                // Check if the response status code is 401 (Unauthorized))
+                if (jqXHR.status === 401) {
+                    const yt_embed = `
+                    <div class="custom-embed yt">
+                        <div class="embed-video">
+                            <iframe src="https://www.youtube.com/embed/${video_id}"></iframe>
+                        </div>
+                    </div>`;
+                    $(link).next().replaceWith(yt_embed);
+                }
             }
         });
     }
