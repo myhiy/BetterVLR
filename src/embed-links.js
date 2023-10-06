@@ -161,9 +161,7 @@ function renderTweet(tweet, anchor_tag) {
             </div>
         </div>`;
     } else if (tweet.video && tweet.all.video.contentType === "gif") {
-        media = `<video controls loop autoplay muted id="gif">
-            <source src="${tweet.video[0].src}" type="${tweet.video[0].type}">Your browser does not support the video tag.
-            </video>`;
+        media = `<video loop autoplay muted><source src="${tweet.video[0].src}" type="video/mp4"></video>`;
     }
 
     let card = "";
