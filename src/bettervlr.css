@@ -211,6 +211,7 @@ video {
   border: 1px solid gray;
   margin-top: 5px;
   max-width: 500px;
+  max-height: 500px;
   border-radius: 5px;
   cursor: pointer;
 }
