@@ -138,7 +138,7 @@ function renderTweet(tweet, anchor_tag) {
     let verified = "";
     if (tweet.all.user.verified_type === "Business") {
         verified = checkmark.business;
-    } else {
+    } else if (tweet.all.user.is_blue_verified) {
         verified = checkmark.blue;
     }
 
