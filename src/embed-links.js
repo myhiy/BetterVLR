@@ -20,7 +20,13 @@ $(document).one("click", post_images, function () {
 // convert image links to embedded images in posts
 $(".post-body").find("a").each(function () {
     const img_src = this.href;
-    $(this).parent().append(`<img class="post-image" style="display:none" src="${img_src}" href="${img_src}" onload="$(this).show();">`);
+    const img = $(`<img style="display:none" src="${img_src}" href="${img_src}">`).on("load", function () {
+        $(this).addClass("post-image").show();
+    }).on("error", function () {
+        $(this).remove();
+    });
+
+    $(this).parent().append(img);
 });
 
 // twitter
